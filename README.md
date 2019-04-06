@@ -6,8 +6,8 @@ various settings to decrease file size.
 ## Results
 
 The results below were generated on Fedora 29 with GCC 8.3.1 from the Godot 3.1
-stable source code. ZIP archives were created using
-`7z a -mx9 <file>.zip <file>`.
+stable source code. Binaries had their debug symbols stripped, and ZIP archives
+were created using `7z a -mx9 <file>.zip <file>`.
 
 - **`full`** builds have all modules enabled.
 - **`micro`** builds have commonly-used modules enabled (such as mbedTLS or

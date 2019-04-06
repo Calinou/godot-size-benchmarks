@@ -1,6 +1,7 @@
 # Copyright © 2019 Hugo Locurcio and contributors - MIT License
 # See `LICENSE.md` included in the source distribution for details.
 
+import os
 import osproc
 import strformat
 import terminal
@@ -115,6 +116,16 @@ proc main() =
             nil,
             {poUsePath, poStdErrToStdOut}
           )
+
+  # Strip binaries of any remaining debug symbols
+  for file in walkFiles("godot/bin/*"):
+    echo execProcess(
+      "strip",
+      "",
+      [file],
+      nil,
+      {poUsePath, poStdErrToStdOut}
+    )
 
 when isMainModule:
   dispatch(main)
