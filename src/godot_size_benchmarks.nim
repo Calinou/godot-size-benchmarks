@@ -14,6 +14,7 @@ const SCONS_FLAGS = [
   "target=release",
   "progress=no",
   "debug_symbols=no",
+  "use_lto=yes",
   "-j10",
 ]
 

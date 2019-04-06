@@ -21,12 +21,12 @@ flags used by each build type.
 
 | Platform | Build type | Size (uncompressed) | Size (in a ZIP archive) |
 | -------: | ---------- | ------------------- | ----------------------- |
-|    Linux | `full`     | 39.0 MB             | 12.5 MB                 |
-|    Linux | `full_2d`  | 27.5 MB             | 10.5 MB                 |
-|    Linux | `micro`    | 28.1 MB             | 10.5 MB                 |
-|    Linux | `micro_2d` | 24.6 MB             | 9.3 MB                  |
-|    Linux | `pico`     | 17.8 MB             | 6.5 MB                  |
-|    Linux | `pico_2d`  | 15.7 MB             | 5.8 MB                  |
+|    Linux | `full`     | 28.6 MB             | 11.1 MB                 |
+|    Linux | `full_2d`  | 24.0 MB             | 9.3 MB                  |
+|    Linux | `micro`    | 25.3 MB             | 9.7 MB                  |
+|    Linux | `micro_2d` | 21.8 MB             | 8.4 MB                  |
+|    Linux | `pico`     | 16.2 MB             | 6.0 MB                  |
+|    Linux | `pico_2d`  | 13.9 MB             | 5.2 MB                  |
 
 ## Running the benchmark locally
 
