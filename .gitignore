@@ -1,0 +1,6 @@
+# Compiled executables
+godot_size_benchmarks
+godot_size_benchmarks.exe
+
+# Build cache
+nimcache/
