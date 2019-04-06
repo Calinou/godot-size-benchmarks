@@ -6,16 +6,15 @@ import osproc
 import strformat
 import terminal
 import cligen
-import cpuinfo
 
 # SCons flags to use for all builds
-const SCONS_FLAGS = [
+let sconsFlagsAll = [
   "tools=no",
   "target=release",
   "progress=no",
   "debug_symbols=no",
   "use_lto=yes",
-  "-j10",
+  &"-j{countProcessors() + 1}",
 ]
 
 # Additional SCons flags to use for each build
@@ -79,12 +78,17 @@ proc main() =
   for buildName, extraSconsFlags in SCONS_FLAGS_EXTRA.items:
     for platform in ["x11", "javascript"]:
       for is2dBuild in [false, true]:
-        let flags2d = if is2dBuild: @SCONS_FLAGS_2D else: @[]
-        let extraSuffix = if is2dBuild: &"{buildName}_2d" else: buildName
+        let flags2d =
+          if is2dBuild: @SCONS_FLAGS_2D
+          else: @[]
+
+        let extraSuffix =
+          if is2dBuild: &"{buildName}_2d"
+          else: buildName
+
         let sconsFlags =
-          @[&"platform={platform}"] &
-          @[&"extra_suffix={extraSuffix}"] &
-          @SCONS_FLAGS &
+          @[&"platform={platform}", &"extra_suffix={extraSuffix}"] &
+          @sconsFlagsAll &
           extraSconsFlags &
           flags2d
 
