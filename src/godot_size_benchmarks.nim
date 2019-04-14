@@ -76,7 +76,7 @@ const SCONS_FLAGS_2D = [
 
 proc main() =
   for buildName, extraSconsFlags in SCONS_FLAGS_EXTRA.items:
-    for platform in ["x11", "javascript"]:
+    for platform in ["x11", "android"]:
       for is2dBuild in [false, true]:
         let flags2d =
           if is2dBuild: @SCONS_FLAGS_2D
@@ -120,6 +120,13 @@ proc main() =
             ["build"],
             nil,
             {poUsePath, poStdErrToStdOut}
+          )
+
+          # Rename the generated APK to contain the extra prefix as it's
+          # not done automatically by Gradle
+          moveFile(
+            "godot/bin/android_release.apk",
+            &"godot/bin/android_release.{extraSuffix}.apk"
           )
 
   # Strip binaries of any remaining debug symbols
