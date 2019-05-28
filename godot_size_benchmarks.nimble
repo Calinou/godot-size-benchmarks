@@ -9,7 +9,7 @@ bin           = @["godot_size_benchmarks"]
 
 # Dependencies
 
-requires "nim >= 0.19.4"
+requires "nim >= 0.19.6"
 requires "cligen >= 0.9.19"
 
 # Tasks
