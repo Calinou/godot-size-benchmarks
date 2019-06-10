@@ -5,10 +5,10 @@ various settings to decrease file size.
 
 ## Results
 
-The results below were generated on Fedora 29 with GCC 8.3.1 from the Godot 3.1
-stable source code. Binaries had their debug symbols stripped, and ZIP archives
-were created using `7z a -mx9 <file>.zip <file>`. Android APK sizes were
-measured after building for `armv7` only, which means only one architecture
+The results below were generated on Fedora 30 with GCC 9.1.1 from the Godot
+3.1.1 stable source code. Binaries had their debug symbols stripped, and ZIP
+archives were created using `7z a -mx9 <file>.zip <file>`. Android APK sizes
+were measured after building for `armv7` only, which means only one architecture
 was included in the APK.
 
 - **`full`** builds have all modules enabled.
@@ -23,17 +23,17 @@ flags used by each build type.
 
 | Platform | Build type | Size (uncompressed) | Size (in a ZIP archive) |
 | -------: | ---------- | ------------------- | ----------------------- |
-|    Linux | `full`     | 28.6 MB             | 11.1 MB                 |
-|    Linux | `full_2d`  | 24.0 MB             | 9.3 MB                  |
-|    Linux | `micro`    | 25.3 MB             | 9.7 MB                  |
-|    Linux | `micro_2d` | 21.8 MB             | 8.4 MB                  |
-|    Linux | `pico`     | 16.2 MB             | 6.0 MB                  |
-|    Linux | `pico_2d`  | 13.9 MB             | 5.2 MB                  |
-|  Android | `full`     | 11.9 MB             | *N/A*                   |
+|    Linux | `full`     | 30.9 MB             | 12.0 MB                 |
+|    Linux | `full_2d`  | 25.9 MB             | 10.0 MB                 |
+|    Linux | `micro`    | 27.3 MB             | 10.4 MB                 |
+|    Linux | `micro_2d` | 23.4 MB             | 9.0 MB                  |
+|    Linux | `pico`     | 15.7 MB             | 6.0 MB                  |
+|    Linux | `pico_2d`  | 13.5 MB             | 5.1 MB                  |
+|  Android | `full`     | 11.8 MB             | *N/A*                   |
 |  Android | `full_2d`  | 9.5 MB              | *N/A*                   |
 |  Android | `micro`    | 9.8 MB              | *N/A*                   |
 |  Android | `micro_2d` | 8.5 MB              | *N/A*                   |
-|  Android | `pico`     | 8.2 MB              | *N/A*                   |
+|  Android | `pico`     | 8.1 MB              | *N/A*                   |
 |  Android | `pico_2d`  | 7.1 MB              | *N/A*                   |
 
 ## Running the benchmark locally
@@ -42,7 +42,7 @@ flags used by each build type.
 
 ### Pre-requisites
 
-- [Nim](https://nim-lang.org/) 0.19.4 or later (can be installed via
+- [Nim](https://nim-lang.org/) 0.19.6 or later (can be installed via
   [choosenim](https://github.com/dom96/choosenim)).
 - Godot build dependencies set up for
   [Linux](https://docs.godotengine.org/en/latest/development/compiling/compiling_for_x11.html)
