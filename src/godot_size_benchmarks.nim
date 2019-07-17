@@ -74,8 +74,6 @@ const SCONS_FLAGS_2D = [
   "disable_3d=yes",
 ]
 
-let rootDir = absolutePath(".")
-
 proc main() =
   for buildName, extraSconsFlags in SCONS_FLAGS_EXTRA.items:
     for platform in ["x11", "android"]:
@@ -107,19 +105,18 @@ proc main() =
           ")…",
         )
 
-        setCurrentDir(joinPath(rootDir, "godot"))
         echo execProcess(
           "scons",
+          "godot",
           sconsFlags,
           nil,
           {poUsePath, poStdErrToStdOut}
         )
 
-
         if platform == "android":
-          setCurrentDir(joinPath(rootDir, "godot/platform/android/java"))
           echo execProcess(
             "./gradlew",
+            "godot/platform/android/java",
             ["build"],
             nil,
             {poUsePath, poStdErrToStdOut}
@@ -127,17 +124,16 @@ proc main() =
 
           # Rename the generated APK to contain the extra prefix as it's
           # not done automatically by Gradle
-          setCurrentDir(joinPath(rootDir, "godot/bin"))
           moveFile(
-            "android_release.apk",
-            &"android_release.{extraSuffix}.apk"
+            "godot/bin/android_release.apk",
+            &"godot/bin/android_release.{extraSuffix}.apk"
           )
 
   # Strip binaries of any remaining debug symbols
-  setCurrentDir(rootDir)
   for file in walkFiles("godot/bin/*"):
     echo execProcess(
       "strip",
+      "",
       [file],
       nil,
       {poUsePath, poStdErrToStdOut}
