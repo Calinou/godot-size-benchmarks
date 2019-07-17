@@ -76,7 +76,7 @@ const SCONS_FLAGS_2D = [
 
 proc main() =
   for buildName, extraSconsFlags in SCONS_FLAGS_EXTRA.items:
-    for platform in ["x11", "android"]:
+    for platform in ["android", "javascript", "x11", "windows"]:
       for is2dBuild in [false, true]:
         let flags2d =
           if is2dBuild: @SCONS_FLAGS_2D

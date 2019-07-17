@@ -6,10 +6,7 @@ various settings to decrease file size.
 ## Results
 
 The results below were generated on Fedora 30 with GCC 9.1.1 from the Godot
-3.1.1 stable source code. Binaries had their debug symbols stripped, and ZIP
-archives were created using `7z a -mx9 <file>.zip <file>`. Android APK sizes
-were measured after building for `armv7` only, which means only one architecture
-was included in the APK.
+3.1.1 stable source code. All binaries had their debug symbols stripped.
 
 - **`full`** builds have all modules enabled.
 - **`micro`** builds have commonly-used modules enabled (such as mbedTLS or
@@ -21,20 +18,50 @@ was included in the APK.
 Check the [build script](src/godot_size_benchmarks.nim) for the list of SCons
 flags used by each build type.
 
-| Platform | Build type | Size (uncompressed) | Size (in a ZIP archive) |
-| -------: | ---------- | ------------------- | ----------------------- |
-|    Linux | `full`     | 30.9 MB             | 12.0 MB                 |
-|    Linux | `full_2d`  | 25.9 MB             | 10.0 MB                 |
-|    Linux | `micro`    | 27.3 MB             | 10.4 MB                 |
-|    Linux | `micro_2d` | 23.4 MB             | 9.0 MB                  |
-|    Linux | `pico`     | 15.7 MB             | 6.0 MB                  |
-|    Linux | `pico_2d`  | 13.5 MB             | 5.1 MB                  |
-|  Android | `full`     | 11.8 MB             | *N/A*                   |
-|  Android | `full_2d`  | 9.5 MB              | *N/A*                   |
-|  Android | `micro`    | 9.8 MB              | *N/A*                   |
-|  Android | `micro_2d` | 8.5 MB              | *N/A*                   |
-|  Android | `pico`     | 8.1 MB              | *N/A*                   |
-|  Android | `pico_2d`  | 7.1 MB              | *N/A*                   |
+| Platform | Build type     | Size (uncompressed) | Size (compressed) |
+| -------: | -------------- | ------------------- | ----------------- |
+|  Android | `full`         | 11.8 MB             | 11.8 MB           |
+|  Android | `full_2d`      | 9.5 MB              | 9.5 MB            |
+|  Android | `micro`        | 9.8 MB              | 9.8 MB            |
+|  Android | `micro_2d`     | 8.5 MB              | 8.5 MB            |
+|  Android | `pico`         | 8.1 MB              | 8.1 MB            |
+|  Android | `pico_2d`      | 7.1 MB              | 7.1 MB            |
+|    HTML5 | `full`         | 13.0 MB             | 4.0 MB            |
+|    HTML5 | `full_2d`      | 11.3 MB             | 3.4 MB            |
+|    HTML5 | `micro`        | 11.5 MB             | 3.4 MB            |
+|    HTML5 | `micro_2d`     | 10.2 MB             | 3.1 MB            |
+|    HTML5 | `pico`         | 10.9 MB             | 3.2 MB            |
+|    HTML5 | `pico_2d`      | 9.7 MB              | 2.9 MB            |
+|    Linux | `full`         | 30.9 MB             | 12.0 MB           |
+|    Linux | `full_2d`      | 25.9 MB             | 10.0 MB           |
+|    Linux | `micro`        | 27.3 MB             | 10.4 MB           |
+|    Linux | `micro_2d`     | 23.4 MB             | 9.0 MB            |
+|    Linux | `pico`         | 15.7 MB             | 6.0 MB            |
+|    Linux | `pico_2d`      | 13.5 MB             | 5.1 MB            |
+|  Windows | `full`         | 26.7 MB             | 10.2 MB           |
+|  Windows | `full_2d`      | 22.5 MB             | 8.6 MB            |
+|  Windows | `micro`        | 23.7 MB             | 9.0 MB            |
+|  Windows | `micro_2d`     | 20.2 MB             | 7.7 MB            |
+|  Windows | ~~`pico`~~     | *(build failing)*   | *N/A*             |
+|  Windows | ~~`pico_2d`~~  | *(build failing)*   | *N/A*             |
+
+### Platform-specific notes
+
+- **Android:** Android APK sizes were measured after building for `armv7` only,
+  which means only one architecture was included in the APK. Android APKs are
+  already compressed on creation, hence the compressed size being identical to
+  the uncompressed size.
+- **HTML5:** Displayed file sizes only include the main WebAssembly blob. The
+  accompanying JavaScript file's size (330 KB uncompressed, 75 KB gzipped)
+  remains mostly constant. Compressed sizes were measured by compressing the
+  WebAssembly blob with `gzip -6`, which is the compression level used on most
+  Web servers (after enabling compression for `.wasm` files).
+- **Linux:** Binaries were compiled with link-time optimization enabled.
+  Compressed sizes were measured by creating ZIP archives using
+  `7z a -mx9 <file>.zip <file>`.
+- **Windows:** Binaries were compiled using MinGW with link-time optimization
+  enabled. Compressed sizes were measured by creating ZIP archives using
+  `7z a -mx9 <file>.zip <file>`.
 
 ## Running the benchmark locally
 
@@ -42,13 +69,14 @@ flags used by each build type.
 
 ### Pre-requisites
 
-- [Nim](https://nim-lang.org/) 0.19.6 or later (can be installed via
+- [Nim](https://nim-lang.org/) 0.20.0 or later (can be installed via
   [choosenim](https://github.com/dom96/choosenim)).
 - Godot build dependencies set up for
-  [Linux](https://docs.godotengine.org/en/latest/development/compiling/compiling_for_x11.html)
-  and
-  [Android](http://docs.godotengine.org/en/latest/development/compiling/compiling_for_android.html).
-- This Git repository _(with submodules initialized)_.
+  [Android](http://docs.godotengine.org/en/latest/development/compiling/compiling_for_android.html),
+  [HTML5](https://docs.godotengine.org/en/latest/development/compiling/compiling_for_web.html),
+  [Linux](https://docs.godotengine.org/en/latest/development/compiling/compiling_for_x11.html) and
+  [Windows](https://docs.godotengine.org/en/latest/development/compiling/compiling_for_windows.html) (MinGW).
+- This Git repository **(with submodules initialized)**.
 
 ### Running
 
