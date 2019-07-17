@@ -91,6 +91,8 @@ Wait for the script to build all binaries; they will be available in the
 
 ## Resources
 
+- [Optimizing a build for size](http://docs.godotengine.org/en/latest/development/compiling/optimizing_for_size.html)
+  in the Godot documentation.
 - [Multiple APK support in Google Play](https://developer.android.com/google/play/publishing/multiple-apks)
   to publish one APK per CPU architecture, greatly reducing the file size.
 
