@@ -18,7 +18,7 @@ let sconsFlagsAll = [
 ]
 
 # Additional SCons flags to use for each build
-const SCONS_FLAGS_EXTRA = {
+const sconsFlagsExtra = {
   "full": @[],
 
   "micro": @[
@@ -70,16 +70,16 @@ const SCONS_FLAGS_EXTRA = {
 }
 
 # Flags to use for 2D-only builds
-const SCONS_FLAGS_2D = [
+const sconsFlags2d = [
   "disable_3d=yes",
 ]
 
 proc main() =
-  for buildName, extraSconsFlags in SCONS_FLAGS_EXTRA.items:
+  for buildName, extraSconsFlags in sconsFlagsExtra.items:
     for platform in ["android", "javascript", "x11", "windows"]:
       for is2dBuild in [false, true]:
         let flags2d =
-          if is2dBuild: @SCONS_FLAGS_2D
+          if is2dBuild: @sconsFlags2d
           else: @[]
 
         let extraSuffix =
