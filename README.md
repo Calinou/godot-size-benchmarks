@@ -5,8 +5,8 @@ various settings to decrease file size.
 
 ## Results
 
-The results below were generated on Fedora 30 with GCC 9.1.1 from the Godot
-3.1.1 stable source code. All binaries had their debug symbols stripped.
+The results below were generated on Fedora 33 with GCC 10.2.1 from the Godot
+3.2.3 stable source code. All binaries had their debug symbols stripped.
 
 - **`full`** builds have all modules enabled.
 - **`micro`** builds have commonly-used modules enabled (such as mbedTLS or
@@ -98,7 +98,7 @@ Wait for the script to build all binaries; they will be available in the
 
 ## License
 
-Copyright © 2019 Hugo Locurcio and contributors
+Copyright © 2019-2021 Hugo Locurcio and contributors
 
 Unless otherwise specified, files in this repository are licensed under the MIT
 license; see [LICENSE.md](LICENSE.md) for more information.
